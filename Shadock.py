@@ -11,16 +11,24 @@ from scipy.linalg import null_space
 
 
 def stationnaire (P):
-  
+    pass
   
     return res
 
 def stochastique (P):
-   
-   
+    for x in range (len(P)):
+        Somme = 0
+        for y in range(len(P[x])):
+           Somme+=P[x,y]
+        if Somme != 1:
+            return False
+    return True
 
 def puits (P,i):
-   
+    if P[i,i]==1:
+        return True
+    else:
+        return False
 
 
 
@@ -50,7 +58,7 @@ def simulation(P, pi0, t0, tf):
 
 
 def Diagonalisation (P):
-   
+   pass
    
 
 # liste d'exemples de chaines de Markov
