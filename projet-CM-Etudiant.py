@@ -14,15 +14,9 @@ from Shadock import stochastique
 from Shadock import puits
 import numpy as np
 
-
 P = np.array([ [5/6 , 1/12, 1/12],  [ 1/4, 1/2, 1/4] , [ 1/4, 0, 3/4] ])
 pi0 = [1 , 0, 0]
-
-print(stochastique(P))
-
-
-
-
+print(Diagonalisation(P))
 
 # Initialement en bonne santé
 pi0 = [1 , 0, 0]

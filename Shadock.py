@@ -11,17 +11,24 @@ from scipy.linalg import null_space
 
 
 def stationnaire (P):
-    pass
-  
-    return res
+    
+    #On cherche les noyaux
+    N = (null_space(np.eye(len(P))-np.transpose(P)))
+    
+    #Normalisation
+    Somme = 0
+    for j in range(len(P)):
+        Somme+=N[j]
+        
+    return N/Somme
 
 def stochastique (P):
     for x in range (len(P)):
         Somme = 0
-        for y in range(len(P[x])):
+        for y in range(len(P)):
            Somme+=P[x,y]
         if Somme != 1:
-            return False
+           return False
     return True
 
 def puits (P,i):
@@ -58,8 +65,15 @@ def simulation(P, pi0, t0, tf):
 
 
 def Diagonalisation (P):
-   pass
-   
+    
+   if np.linalg.det(P) == 0:
+       print("La matrice n'est pas invertible")
+   else:
+       D, V = np.linalg.eig(P)
+       n=100
+       D=D**n
+       P = V.dot(np.diag(D)).dot(np.linalg.inv(V))
+   return P
 
 # liste d'exemples de chaines de Markov
 def Exemple(n):
