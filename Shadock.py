@@ -12,7 +12,7 @@ from scipy.linalg import null_space
 
 def stationnaire (P):
     
-    #On cherche les noyaux
+    #On cherche le noyau
     N = (null_space(np.eye(len(P))-np.transpose(P)))
     
     #Normalisation
@@ -68,13 +68,33 @@ def Diagonalisation (P):
     
    if np.linalg.det(P) == 0:
        print("La matrice n'est pas invertible")
+       
+       return False
    else:
        D, V = np.linalg.eig(P)
-       n=100
-       D=D**n
-       P = V.dot(np.diag(D)).dot(np.linalg.inv(V))
-   return P
+       
+       return np.diag(D), V
 
+def Puissance (P, n):
+    D, V = Diagonalisation(P)
+    D = D**n
+    P = V.dot(D).dot(np.linalg.inv(V))
+    return P
+
+def Convergence (P):
+    D, V = Diagonalisation(P)
+    
+    A = D[0][0]
+    B = 0
+    for i in range(len(D)):
+        if D[i][i] > A:
+            B = A
+            A = D[i][i]
+        elif D[i][i] < A and D[i][i] > B:
+            B = D[i][i]
+    
+    return B
+    
 # liste d'exemples de chaines de Markov
 def Exemple(n):
    if n==1: 
